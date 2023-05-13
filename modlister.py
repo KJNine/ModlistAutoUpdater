@@ -9,14 +9,17 @@ def main(argv):
     srch = []
     with open('config.json') as f_defs:
         js_defs = json.load(f_defs)
+    stopaftersrch = True
     if(len(argv) > 0):
         with open(argv[0], 'r') as f_srch:
             srchjs = json.load(f_srch)
-            srch = srchjs[method]
+            srch = srchjs[method]   
+        if(argv[len(argv)-1] == '-a'):
+            stopaftersrch = False
     if(len(argv) > 1 and argv[1] == 'curseforge'):
         method = 'curseforge'
     if(method == 'modrinth'):
-        modrinth(srch, js_defs)
+        modrinth(srch, js_defs, stopaftersrch)
     print(f"{Colors.LIGHT_PURPLE}Finished Selecting Mods:{Colors.END}")
     for i in range(0, len(output)):
         print(f"{Colors.BLUE}{output[i][1]}{Colors.DARK_GRAY} - {output[i][0]}{Colors.END}")
@@ -44,7 +47,7 @@ def main(argv):
                 json.dump(outjs, f_mods, indent=4)
             print(f"{Colors.LIGHT_GREEN}Saved new modlist file.{Colors.END}")
 
-def modrinth(srch, js_defs):
+def modrinth(srch, js_defs, stopaftersrch):
     vers = js_defs['versions']
     url = js_defs['modrinth_url']
     acxm = ("autoconfirm-exact-match" in js_defs and js_defs["autoconfirm-exact-match"])
@@ -52,7 +55,8 @@ def modrinth(srch, js_defs):
     srch.append('exit')
     sIter = iter(srch)
     loopQuery(url_srch, vers, True, lambda : next(sIter))
-    loopQuery(url_srch, vers, acxm, lambda : input(f"{Colors.LIGHT_GRAY}Enter next mod search (or type 'exit'): {Colors.END}"))
+    if(len(srch) == 0 or not stopaftersrch):
+        loopQuery(url_srch, vers, acxm, lambda : input(f"{Colors.LIGHT_GRAY}Enter next mod search (or type 'exit'): {Colors.END}"))
 
 def loopQuery(url_srch, vers, acxm, func):
     query = func()
