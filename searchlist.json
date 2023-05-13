@@ -1,0 +1,32 @@
+{
+    "modrinth": [
+        "carpet",
+        "sodium",
+        "lithium",
+        "cloth-config",
+        "command-macros",
+        "dynamiccrosshair",
+        "dynamic-fps",
+        "fabric-api",
+        "inventory-tabs-updated",
+        "modmenu",
+        "no-chat-reports",
+        "replaymod",
+        "replay-voice-chat",
+        "simple-voice-chat",
+        "chatpatches",
+        "horsestatsvanilla",
+        "in-game-account-switcher"
+    ],
+    "curseforge": [
+        "item-scroller",
+        "litematica",
+        "malilib",
+        "minihud",
+        "tweakeroo",
+        "xaeros-minimap",
+        "xaeros-world-map",
+        "autofish",
+        "worldedit"
+    ]
+}
